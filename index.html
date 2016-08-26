@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<!--[if IE 7]> <html class="ie ie7" lang="en-US"> <![endif]-->
+<!--[if IE 8]> <html class="ie ie8" lang="en-US"> <![endif]-->
+<!--[if !(IE 7) | !(IE 8) ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Deep Decorators | Events decorators</title>
+	<link rel="shortcut icon" type="image/png" href="http://hnd-demo.detheme.com/wp-content/uploads/2015/06/fav-icons.png">
+
+	<link property rel='stylesheet' id='contact-form-7-css' href='/wp-content/plugins/contact-form-7/includes/css/styles.css' type='text/css' media='all' />
+    <link property rel='stylesheet' id='essential-grid-plugin-settings-css' href='/wp-content/plugins/essential-grid/public/assets/css/settings.css' type='text/css' media='all' />
+    <link property rel='stylesheet' id='rs-plugin-settings-css' href='/wp-content/plugins/revslider/rs-plugin/css/settings.css' type='text/css' media='all' />
+	<link property rel='stylesheet' id='js_composer_front-css' href='/wp-content/plugins/js_composer/assets/css/js_composer.css' type='text/css' media='all' />
+    <link property rel='stylesheet' id='detheme-vc-css' href='/wp-content/plugins/hnd-vc-addon/css/plugin_style.css' type='text/css' media='all' />
+    <style type="text/css">
+        @import url(/wp-content/themes/hnd/style.css);
+        @import url(/wp-content/themes/hnd/css/bootstrap.css);
+        @import url(/wp-content/themes/hnd/css/flaticon.css);
+        @import url(http://fonts.googleapis.com/css?family=Open+Sans:100,300,400,300italic,600,700);
+        @import url(http://fonts.googleapis.com/css?family=Montserrat:100,300,400,300italic,400italic,600,700,800&#038;subset=latin);
+        @import url(http://fonts.googleapis.com/css?family=Montserrat&#038;subset=latin);
+        @import url(http://fonts.googleapis.com/css?family=Lora:100,300,400,300italic,400italic,600,700);
+        @import url(/wp-content/themes/hnd/css/hnd.css);
+        @import url(/wp-content/themes/hnd/css/customstyle-site19.css);
+    </style>
+    <link property rel='stylesheet' id='owl.carousel-css' href='/wp-content/plugins/hnd-vc-addon/css/owl.carousel.css' type='text/css' media='all' />
+	<link property rel='stylesheet' id='custom-inline-style' href='/wp-content/plugins/custom-inline-style.css' type='text/css' media='all' />
+	
+    <script type="text/javascript">
+        var ajaxurl = 'http://hnd-demo.detheme.com/logocentered/wp-admin/admin-ajax.php';
+        var themecolor = '#38a4b4';
+    </script>
+    <script type='text/javascript' src='/wp-includes/js/jquery/jquery.js'></script>
+    <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/hnd-report-post/js/report.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/hnd-vc-addon/js/script.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/essential-grid/public/assets/js/lightbox.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/essential-grid/public/assets/js/jquery.themepunch.tools.min.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/essential-grid/public/assets/js/jquery.themepunch.essential.min.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/revslider/rs-plugin/js/jquery.themepunch.revolution.min.js'></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            // CUSTOM AJAX CONTENT LOADING FUNCTION
+            var ajaxRevslider = function(obj) {
+
+                // obj.type : Post Type
+                // obj.id : ID of Content to Load
+                // obj.aspectratio : The Aspect Ratio of the Container / Media
+                // obj.selector : The Container Selector where the Content of Ajax will be injected. It is done via the Essential Grid on Return of Content
+
+                var content = "";
+
+                data = {};
+
+                data.action = 'revslider_ajax_call_front';
+                data.client_action = 'get_slider_html';
+                data.token = '113a28fd85';
+                data.type = obj.type;
+                data.id = obj.id;
+                data.aspectratio = obj.aspectratio;
+
+                // SYNC AJAX REQUEST
+                jQuery.ajax({
+                    type: "post",
+                    url: "http://hnd-demo.detheme.com/logocentered/wp-admin/admin-ajax.php",
+                    dataType: 'json',
+                    data: data,
+                    async: false,
+                    success: function(ret, textStatus, XMLHttpRequest) {
+                        if (ret.success == true)
+                            content = ret.data;
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }
+                });
+
+                // FIRST RETURN THE CONTENT WHEN IT IS LOADED !!
+                return content;
+            };
+
+            // CUSTOM AJAX FUNCTION TO REMOVE THE SLIDER
+            var ajaxRemoveRevslider = function(obj) {
+                return jQuery(obj.selector + " .rev_slider").revkill();
+            };
+
+            // EXTEND THE AJAX CONTENT LOADING TYPES WITH TYPE AND FUNCTION
+            var extendessential = setInterval(function() {
+                if (jQuery.fn.tpessential != undefined) {
+                    clearInterval(extendessential);
+                    if (typeof(jQuery.fn.tpessential.defaults) !== 'undefined') {
+                        jQuery.fn.tpessential.defaults.ajaxTypes.push({
+                            type: "revslider",
+                            func: ajaxRevslider,
+                            killfunc: ajaxRemoveRevslider,
+                            openAnimationSpeed: 0.3
+                        });
+                        // type:  Name of the Post to load via Ajax into the Essential Grid Ajax Container
+                        // func: the Function Name which is Called once the Item with the Post Type has been clicked
+                        // killfunc: function to kill in case the Ajax Window going to be removed (before Remove function !
+                        // openAnimationSpeed: how quick the Ajax Content window should be animated (default is 0.3)
+                    }
+                }
+            }, 30);
+        });
+    </script>
+    <script type="text/javascript">
+        (function(url) {
+            if (/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)) {
+                return;
+            }
+            var addEvent = function(evt, handler) {
+                if (window.addEventListener) {
+                    document.addEventListener(evt, handler, false);
+                } else if (window.attachEvent) {
+                    document.attachEvent('on' + evt, handler);
+                }
+            };
+            var removeEvent = function(evt, handler) {
+                if (window.removeEventListener) {
+                    document.removeEventListener(evt, handler, false);
+                } else if (window.detachEvent) {
+                    document.detachEvent('on' + evt, handler);
+                }
+            };
+            var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+            var logHuman = function() {
+                var wfscr = document.createElement('script');
+                wfscr.type = 'text/javascript';
+                wfscr.async = true;
+                wfscr.src = url + '&r=' + Math.random();
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(wfscr);
+                for (var i = 0; i < evts.length; i++) {
+                    removeEvent(evts[i], logHuman);
+                }
+            };
+            for (var i = 0; i < evts.length; i++) {
+                addEvent(evts[i], logHuman);
+            }
+        })('//hnd-demo.detheme.com/logocentered/?wordfence_logHuman=1&hid=86F8D7D2654AF2B15A9FED1FBA7454EF');
+    </script>
+
+</head>
+
+<body class="home page page-id-5 page-template page-template-fullwidth page-template-fullwidth-php dt_custom_body wpb-js-composer js-comp-ver-4.5.2 vc_responsive">
+    <div class="paspartu_outer paspartu_on_bottom_fixed body_background_color">
+        <div class="paspartu_inner body_background_color">
+            <div class="container dt-boxed-stretched-container body_background_color"> <input type="checkbox" name="nav" id="main-nav-check">
+                <div class="top-head is-sticky-menu ">
+                    <div id="head-page" class="head-page adminbar-not-here alt reveal notopbar transparent stickysolid menu_background_color">
+                        <div class="container">
+                            <div id="dt-menu" class="dt-menu-middle"><label for="main-nav-check" class="toggle" onclick="" title="Close"><i class="icon-cancel-1"></i></label>
+                                <ul id="menu-main-menu" class="">
+                                   <li id="menu-item-1558" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item menu-item-1558"><a href="/"><span>Home</span></a></li>
+                                    <li id="menu-item-1559" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-38 current_page_item menu-item-1559"><a href="/about-us"><span>About Us</span></a></li>
+                                    
+									<li id="menu-item-1560" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dt-megamenu dt-megamenu-width-set menu-item-1560"><a href="/services"><span>Services</span></a><label for="fof1560" class="toggle-sub" onclick="">&rsaquo;</label> <input id="fof1560" class="sub-nav-check" type="checkbox">
+                                        <ul id="fof-sub-1560" class="sub-nav megamenu-sub dt-megamenu-custom-width-1560">
+                                            <li class="sub-heading"> <label for="fof1560" class="toggle" onclick="" title="Back">&lsaquo; Back</label></li>
+                                            <li>
+                                                <div class="row" id="megamenu_bg_1560">
+                                                    <div class="col-sm-12 menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children megamenu-column menu-item-first-child dt-megamenu-grid">
+                                                        <ul class="dt-megamenu-sub-nav">
+                                                            <li id="menu-item-1523" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-first-child menu-item-1523"><a href="/services/chori"><span>Chori</span></a></li>
+															<li id="menu-item-1525" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-1525"><a href="/services/entry"><span>Entry</span></a></li>
+                                                            <li id="menu-item-1526" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-1526"><a href="/services/stage"><span>Stage</span></a></li>
+                                                            <li id="menu-item-1524" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-1524"><a href="/services/theme-design"><span>Theme Design</span></a></li>
+                                                            <li id="menu-item-1524" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-1524"><a href="/services/gate"><span>Gate</span></a></li>
+                                                            <li id="menu-item-1539" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-1539"><a href="/services/mandap"><span>Mandap</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="logo-desktop hidden-sm hidden-xs">
+                                        <a href="/" style=""><img id="logomenu" src="../wp-content/uploads/sites/19/2015/05/shell-diya.png" alt="hnd" class="img-responsive halfsize" width="80"></a>
+                                        <a href="/" style=""><img id="logomenureveal" src="../wp-content/uploads/sites/19/2015/05/shell-diya.png" alt="hnd" class="img-responsive halfsize" width="80"></a>
+                                    </li>
+                                    <li id="menu-item-1573" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1573"><a href="/gallery"><span>Gallery</span></a></li>
+                                    <li id="menu-item-1571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1571"><a href="/contact-us"><span>Contact Us</span></a></li>
+									<li id="menu-item-1559" style="visibility: hidden;" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-38 current_page_item current-menu-item menu-item-1559"><a href="/about-us/index.html"><span>About Us</span></a></li>
+                                </ul><label class="toggle close-all" onclick="uncheckboxes(&#39;nav&#39;)"><i class="icon-cancel-1"></i></label></div>
+							<div class="overlay"></div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div>
+                                    <div id="mobile-header" class="hidden-sm-max col-sm-12"> 
+										<label for="main-nav-check" class="toggle" onclick="" title="Menu"><i class="icon-menu"></i></label>
+                                        <a href="/">
+											<img id="logomenumobile" src="../wp-content/uploads/sites/19/2015/05/shell-diya.png" 
+												rel="../wp-content/uploads/sites/19/2015/05/shell-diya.png" alt="" class="img-responsive halfsize" width="80" />
+											<img id="logomenurevealmobile" src="../wp-content/uploads/sites/19/2015/05/shell-diya.png" alt="" 
+												class="img-responsive halfsize" width="80" />
+										</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content post-5 page type-page status-publish hentry">
+                    <div class="nosidebar">
+                        <div class="blank-reveal-area"></div>
+                        <div class="post-article">
+                            <div class="container dt-container">
+                                <div class="wpb_row vc_row-fluid vc_custom_1434524982018">
+                                    <div class="vc_col-sm-12 wpb_column column_container">
+                                        <div class="wpb_wrapper">
+                                            <div class="wpb_revslider_element wpb_content_element">
+                                                <div id="rev_slider_3_1_wrapper" class="rev_slider_wrapper fullscreen-container" style="padding:0px;">
+                                                    <div id="rev_slider_3_1" class="rev_slider fullscreenbanner" style="display:none;">
+                                                        <ul>
+                                                            <li data-transition="slidehorizontal" data-slotamount="7" data-masterspeed="800" data-saveperformance="off"> 
+																<img src="/wp-content/uploads/sites/19/2015/05/rec-stage3.jpg" alt="c-home-01" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                                            </li>
+                                                            <li data-transition="slidehorizontal" data-slotamount="7" data-masterspeed="800" data-saveperformance="off"> 
+																<img src="/wp-content/uploads/sites/19/2015/05/rec-stage4.jpg" alt="c-home-02" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                                            </li>
+                                                            <li data-transition="slidehorizontal" data-slotamount="7" data-masterspeed="800" data-saveperformance="off"> 
+																<img src="/wp-content/uploads/sites/19/2015/05/chori2.jpg" alt="c-home-03" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                                            </li>
+															<li data-transition="slidehorizontal" data-slotamount="7" data-masterspeed="800" data-saveperformance="off"> 
+																<img src="/wp-content/uploads/sites/19/2015/05/chori5.jpg" alt="c-home-03" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tp-static-layers">
+                                                            <div class="tp-caption sfb tp-static-layer" data-x="center" data-hoffset="0" data-y="bottom" data-voffset="-30" data-speed="900" data-start="2500" data-easing="Power4.easeInOut" data-startslide="0" data-endslide="2" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 5;">
+                                                                <a href="#welcome"><img src="/wp-content/uploads/sites/19/revslider/homepage-main-slider/downarrows.png" alt="" data-ww="40" data-hh="40"></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+                                                    </div>
+                                                    <script type="text/javascript">
+                                                        /******************************************
+                                                        					-	PREPARE PLACEHOLDER FOR SLIDER	-
+                                                        				******************************************/
+
+
+                                                        var setREVStartSize = function() {
+                                                            var tpopt = new Object();
+                                                            tpopt.startwidth = 1920;
+                                                            tpopt.startheight = 866;
+                                                            tpopt.container = jQuery('#rev_slider_3_1');
+                                                            tpopt.fullScreen = "on";
+                                                            tpopt.forceFullWidth = "on";
+
+                                                            tpopt.container.closest(".rev_slider_wrapper").css({
+                                                                height: tpopt.container.height()
+                                                            });
+                                                            tpopt.width = parseInt(tpopt.container.width(), 0);
+                                                            tpopt.height = parseInt(tpopt.container.height(), 0);
+                                                            tpopt.bw = tpopt.width / tpopt.startwidth;
+                                                            tpopt.bh = tpopt.height / tpopt.startheight;
+                                                            if (tpopt.bh > tpopt.bw) tpopt.bh = tpopt.bw;
+                                                            if (tpopt.bh < tpopt.bw) tpopt.bw = tpopt.bh;
+                                                            if (tpopt.bw < tpopt.bh) tpopt.bh = tpopt.bw;
+                                                            if (tpopt.bh > 1) {
+                                                                tpopt.bw = 1;
+                                                                tpopt.bh = 1
+                                                            }
+                                                            if (tpopt.bw > 1) {
+                                                                tpopt.bw = 1;
+                                                                tpopt.bh = 1
+                                                            }
+                                                            tpopt.height = Math.round(tpopt.startheight * (tpopt.width / tpopt.startwidth));
+                                                            if (tpopt.height > tpopt.startheight && tpopt.autoHeight != "on") tpopt.height = tpopt.startheight;
+                                                            if (tpopt.fullScreen == "on") {
+                                                                tpopt.height = tpopt.bw * tpopt.startheight;
+                                                                var cow = tpopt.container.parent().width();
+                                                                var coh = jQuery(window).height();
+                                                                if (tpopt.fullScreenOffsetContainer != undefined) {
+                                                                    try {
+                                                                        var offcontainers = tpopt.fullScreenOffsetContainer.split(",");
+                                                                        jQuery.each(offcontainers, function(e, t) {
+                                                                            coh = coh - jQuery(t).outerHeight(true);
+                                                                            if (coh < tpopt.minFullScreenHeight) coh = tpopt.minFullScreenHeight
+                                                                        })
+                                                                    } catch (e) {}
+                                                                }
+                                                                tpopt.container.parent().height(coh);
+                                                                tpopt.container.height(coh);
+                                                                tpopt.container.closest(".rev_slider_wrapper").height(coh);
+                                                                tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(coh);
+                                                                tpopt.container.css({
+                                                                    height: "100%"
+                                                                });
+                                                                tpopt.height = coh;
+                                                            } else {
+                                                                tpopt.container.height(tpopt.height);
+                                                                tpopt.container.closest(".rev_slider_wrapper").height(tpopt.height);
+                                                                tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(tpopt.height);
+                                                            }
+                                                        };
+
+                                                        /* CALL PLACEHOLDER */
+                                                        setREVStartSize();
+
+
+                                                        var tpj = jQuery;
+                                                        tpj.noConflict();
+                                                        var revapi3;
+
+                                                        tpj(document).ready(function() {
+
+                                                            if (tpj('#rev_slider_3_1').revolution == undefined) {
+                                                                revslider_showDoubleJqueryError('#rev_slider_3_1');
+                                                            } else {
+                                                                revapi3 = tpj('#rev_slider_3_1').show().revolution({
+                                                                    dottedOverlay: "none",
+                                                                    delay: 5000,
+                                                                    startwidth: 1920,
+                                                                    startheight: 866,
+                                                                    hideThumbs: 200,
+
+                                                                    thumbWidth: 100,
+                                                                    thumbHeight: 50,
+                                                                    thumbAmount: 3,
+
+
+                                                                    simplifyAll: "off",
+
+                                                                    navigationType: "none",
+                                                                    navigationArrows: "solo",
+                                                                    navigationStyle: "round",
+
+                                                                    touchenabled: "on",
+                                                                    onHoverStop: "on",
+                                                                    nextSlideOnWindowFocus: "off",
+
+                                                                    swipe_threshold: 75,
+                                                                    swipe_min_touches: 1,
+                                                                    drag_block_vertical: false,
+
+
+
+                                                                    keyboardNavigation: "off",
+
+                                                                    navigationHAlign: "center",
+                                                                    navigationVAlign: "bottom",
+                                                                    navigationHOffset: 0,
+                                                                    navigationVOffset: 20,
+
+                                                                    soloArrowLeftHalign: "left",
+                                                                    soloArrowLeftValign: "center",
+                                                                    soloArrowLeftHOffset: 20,
+                                                                    soloArrowLeftVOffset: 0,
+
+                                                                    soloArrowRightHalign: "right",
+                                                                    soloArrowRightValign: "center",
+                                                                    soloArrowRightHOffset: 20,
+                                                                    soloArrowRightVOffset: 0,
+
+                                                                    shadow: 0,
+                                                                    fullWidth: "off",
+                                                                    fullScreen: "on",
+
+                                                                    spinner: "spinner0",
+
+                                                                    stopLoop: "off",
+                                                                    stopAfterLoops: -1,
+                                                                    stopAtSlide: -1,
+
+                                                                    shuffle: "off",
+
+
+                                                                    forceFullWidth: "on",
+                                                                    fullScreenAlignForce: "on",
+                                                                    minFullScreenHeight: "",
+                                                                    hideTimerBar: "on",
+                                                                    hideThumbsOnMobile: "off",
+                                                                    hideNavDelayOnMobile: 1500,
+                                                                    hideBulletsOnMobile: "off",
+                                                                    hideArrowsOnMobile: "off",
+                                                                    hideThumbsUnderResolution: 0,
+
+                                                                    fullScreenOffsetContainer: ".paspartu_top, .paspartu_bottom",
+                                                                    fullScreenOffset: "",
+                                                                    hideSliderAtLimit: 0,
+                                                                    hideCaptionAtLimit: 0,
+                                                                    hideAllCaptionAtLilmit: 0,
+                                                                    startWithSlide: 0
+                                                                });
+
+
+
+                                                            }
+                                                        }); /*ready*/
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container dt-container">
+                                <div id="welcome" class="wpb_row vc_row-fluid vc_custom_1434525323785">
+                                    <div class="vc_col-sm-12 wpb_column column_container">
+                                        <div class="wpb_wrapper">
+                                            <div id="section-1" class="dt-section-head left vc_custom_1434599444733 size-xlarge" dir="ltr" data-uk-scrollspy="{cls:'uk-animation-slide-left', delay:300}">
+                                                <div>
+                                                    <h2 style="color:#000000" class="section-main-title">Welcome to Deep Decorators</h2></div>
+                                            </div>
+                                            <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right">
+                                                <div class="wpb_wrapper">
+                                                    <p style="text-align: left; font-family: lora; font-size: 24px; font-style: italic;"><span style="color: #929292;">We hope that you will find inspiration here!</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="wpb_row vc_row-fluid">
+                                                <div class="vc_col-sm-6 wpb_column column_container vc_custom_1434099151225">
+                                                    <div class="wpb_wrapper">
+                                                        <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right">
+                                                            <div class="wpb_wrapper">
+                                                                <p style="text-align: left; font-size: 30px;">We provide clients with the highest possible level of service anywhere in the area.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="vc_col-sm-6 xs-no-border xs-padding-inherit wpb_column column_container vc_custom_1434098849221">
+                                                    <div class="wpb_wrapper">
+                                                        <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left">
+                                                            <div class="wpb_wrapper">
+                                                                <p>From concept through construction, to the finishing touches of each of your projects, you can rely on the our team to deliver a personal environment tailored specifically for you. By interpreting an individual client&#8217;s style and needs, our licensed designers can successfully incorporate function while following current fashion trends.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-container wpb_row vc_row-fluid vc_custom_1433729391546">
+                                <div>
+                                    <div>
+                                        <div class="vc_col-sm-12 wpb_column column_container vc_custom_1433494649186">
+                                            <div class="wpb_wrapper">
+                                                
+                                                <article class="myportfolio-container hnd" id="esg-grid-1-1-wrap">
+                                                    <div id="esg-grid-1-1" class="esg-grid" style="background-color: transparent;padding: 0px 1.85%px 0px 1.85%px ; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;">
+                                                        <ul>
+                                                            <li class="filterall filter-featured eg-hnd-services-wrapper eg-post-id-278" data-date="1433494048" data-cobblesw="1" data-cobblesh="1">
+                                                                <div class="esg-media-cover-wrapper">
+                                                                    <div class="esg-entry-media"><img src="/wp-content/uploads/sites/19/2015/05/chori1.jpg" alt=""></div>
+                                                                    <div class="esg-entry-cover">
+                                                                        <div class="esg-overlay esg-slidedown eg-hnd-services-container" data-delay="0"></div>
+                                                                        <div class="esg-center eg-post-278 eg-hnd-services-element-2">Wedding Chori Design</div>
+                                                                        <div class="esg-center eg-post-278 eg-handlehideunder eg-hnd-services-element-3 esg-slideup" data-delay="0.41" data-hideunder="450" data-hidetype="display">Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Etiam porta sem malesuada.</div>
+                                                                        <div class="esg-center eg-post-278 eg-hnd-services-element-7-a esg-slideup" data-delay="0.58"><a class="eg-hnd-services-element-7 eg-post-278" href="http://hnd-demo.detheme.com/logocentered/services/services-1/" target="_self">View Detail</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterall filter-featured eg-hnd-services-wrapper eg-post-id-287" data-date="1433497980" data-cobblesw="1" data-cobblesh="1">
+                                                                <div class="esg-media-cover-wrapper">
+                                                                    <div class="esg-entry-media"><img src="/wp-content/uploads/sites/19/2015/05/theme-design5.jpg" alt=""></div>
+                                                                    <div class="esg-entry-cover">
+                                                                        <div class="esg-overlay esg-slidedown eg-hnd-services-container" data-delay="0"></div>
+                                                                        <div class="esg-center eg-post-287 eg-hnd-services-element-2">Theme Design</div>
+                                                                        <div class="esg-center eg-post-287 eg-handlehideunder eg-hnd-services-element-3 esg-slideup" data-delay="0.41" data-hideunder="450" data-hidetype="display">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</div>
+                                                                        <div class="esg-center eg-post-287 eg-hnd-services-element-7-a esg-slideup" data-delay="0.58"><a class="eg-hnd-services-element-7 eg-post-287" href="http://hnd-demo.detheme.com/logocentered/services/service-06/" target="_self">View Detail</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterall filter-category-i filter-featured eg-hnd-services-wrapper eg-post-id-1044" data-date="1434100756" data-cobblesw="1" data-cobblesh="1">
+                                                                <div class="esg-media-cover-wrapper">
+                                                                    <div class="esg-entry-media"><img src="/wp-content/uploads/sites/19/2015/05/rec-stage3.jpg" alt=""></div>
+                                                                    <div class="esg-entry-cover">
+                                                                        <div class="esg-overlay esg-slidedown eg-hnd-services-container" data-delay="0"></div>
+                                                                        <div class="esg-center eg-post-1044 eg-hnd-services-element-2">Reception Stage Design</div>
+                                                                        <div class="esg-center eg-post-1044 eg-handlehideunder eg-hnd-services-element-3 esg-slideup" data-delay="0.41" data-hideunder="450" data-hidetype="display">Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui.</div>
+                                                                        <div class="esg-center eg-post-1044 eg-hnd-services-element-7-a esg-slideup" data-delay="0.58"><a class="eg-hnd-services-element-7 eg-post-1044" href="http://hnd-demo.detheme.com/logocentered/services/renovations-restoration/" target="_self">View Detail</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </article>
+                                                <div class="clear"></div>
+                                                <script type="text/javascript">
+                                                    function eggbfc(winw, resultoption) {
+                                                        var lasttop = winw,
+                                                            lastbottom = 0,
+                                                            smallest = 9999,
+                                                            largest = 0,
+                                                            samount = 0,
+                                                            lamoung = 0,
+                                                            lastamount = 0,
+                                                            resultid = 0,
+                                                            resultidb = 0,
+                                                            responsiveEntries = [{
+                                                                width: 1400,
+                                                                amount: 3
+                                                            }, {
+                                                                width: 1170,
+                                                                amount: 3
+                                                            }, {
+                                                                width: 1024,
+                                                                amount: 3
+                                                            }, {
+                                                                width: 960,
+                                                                amount: 1
+                                                            }, {
+                                                                width: 778,
+                                                                amount: 1
+                                                            }, {
+                                                                width: 640,
+                                                                amount: 1
+                                                            }, {
+                                                                width: 480,
+                                                                amount: 1
+                                                            }];
+                                                        if (responsiveEntries != undefined && responsiveEntries.length > 0)
+                                                            jQuery.each(responsiveEntries, function(index, obj) {
+                                                                var curw = obj.width != undefined ? obj.width : 0,
+                                                                    cura = obj.amount != undefined ? obj.amount : 0;
+                                                                if (smallest > curw) {
+                                                                    smallest = curw;
+                                                                    samount = cura;
+                                                                    resultidb = index;
+                                                                }
+                                                                if (largest < curw) {
+                                                                    largest = curw;
+                                                                    lamount = cura;
+                                                                }
+                                                                if (curw > lastbottom && curw <= lasttop) {
+                                                                    lastbottom = curw;
+                                                                    lastamount = cura;
+                                                                    resultid = index;
+                                                                }
+                                                            })
+                                                        if (smallest > winw) {
+                                                            lastamount = samount;
+                                                            resultid = resultidb;
+                                                        }
+                                                        var obj = new Object;
+                                                        obj.index = resultid;
+                                                        obj.column = lastamount;
+                                                        if (resultoption == "id")
+                                                            return obj;
+                                                        else
+                                                            return lastamount;
+                                                    }
+                                                    if ("cobbles" == "even") {
+                                                        var coh = 0,
+                                                            container = jQuery("#esg-grid-1-1");
+                                                        var cwidth = container.width(),
+                                                            ar = "6:4",
+                                                            gbfc = eggbfc(jQuery(window).width(), "id"),
+                                                            row = 3;
+                                                        ar = ar.split(":");
+                                                        aratio = parseInt(ar[0], 0) / parseInt(ar[1], 0);
+                                                        coh = cwidth / aratio;
+                                                        coh = coh / gbfc.column * row;
+                                                        var ul = container.find("ul").first();
+                                                        ul.css({
+                                                            display: "block",
+                                                            height: coh + "px"
+                                                        });
+                                                    }
+                                                    var essapi_1;
+                                                    jQuery(document).ready(function() {
+                                                        essapi_1 = jQuery("#esg-grid-1-1").tpessential({
+                                                            gridID: 1,
+                                                            layout: "cobbles",
+                                                            forceFullWidth: "off",
+                                                            lazyLoad: "off",
+                                                            row: 3,
+                                                            loadMoreAjaxToken: "25770fcf7f",
+                                                            loadMoreAjaxUrl: "http://hnd-demo.detheme.com/logocentered/wp-admin/admin-ajax.php",
+                                                            loadMoreAjaxAction: "Essential_Grid_Front_request_ajax",
+                                                            ajaxContentTarget: "ess-grid-ajax-container-",
+                                                            ajaxScrollToOffset: "0",
+                                                            ajaxCloseButton: "off",
+                                                            ajaxContentSliding: "on",
+                                                            ajaxScrollToOnLoad: "on",
+                                                            ajaxNavButton: "off",
+                                                            ajaxCloseType: "type1",
+                                                            ajaxCloseInner: "false",
+                                                            ajaxCloseStyle: "light",
+                                                            ajaxClosePosition: "tr",
+                                                            space: 0,
+                                                            pageAnimation: "fade",
+                                                            paginationScrollToTop: "off",
+                                                            spinner: "spinner0",
+                                                            lightBoxMode: "single",
+                                                            cobblesPattern: "1x1,1x1,1x1,3x1",
+                                                            animSpeed: 1000,
+                                                            delayBasic: 1,
+                                                            mainhoverdelay: 1,
+                                                            filterType: "single",
+                                                            showDropFilter: "hover",
+                                                            filterGroupClass: "esg-fgc-1",
+                                                            aspectratio: "6:4",
+                                                            responsiveEntries: [{
+                                                                width: 1400,
+                                                                amount: 3
+                                                            }, {
+                                                                width: 1170,
+                                                                amount: 3
+                                                            }, {
+                                                                width: 1024,
+                                                                amount: 3
+                                                            }, {
+                                                                width: 960,
+                                                                amount: 1
+                                                            }, {
+                                                                width: 778,
+                                                                amount: 1
+                                                            }, {
+                                                                width: 640,
+                                                                amount: 1
+                                                            }, {
+                                                                width: 480,
+                                                                amount: 1
+                                                            }]
+                                                        });
+
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-container wpb_row vc_row-fluid vc_custom_1434332818043" data-speed="2" data-type="background">
+                                <div class="container dt-container">
+                                    <div class="row">
+                                        <div class="vc_col-sm-12 wpb_column column_container vc_custom_1433494649186">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_text_column wpb_content_element">
+                                                    <div class="wpb_wrapper">
+                                                        <p style="text-align: center; font-family: montserrat; font-weight: 800; font-size: 1.6em;"><a style="color: #fff;" href="/services">SEE OTHER SERVICES</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-container wpb_row vc_row-fluid vc_custom_1433729377418">
+                                <div>
+                                    <div>
+                                        <div class="vc_col-sm-4 equal-height wpb_column column_container vc_custom_1433830438575">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right vc_align_center default">
+                                                    <div class="wpb_wrapper"> <img class=" vc_box_border_grey " src="http://hnd-demo.detheme.com/logocentered/wp-content/uploads/sites/19/2015/05/thumbnail-grywhite01-257x257.jpg" width="257" height="257" alt="thumbnail-grywhite01" title="thumbnail-grywhite01" /> </div>
+                                                </div>
+                                                <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right">
+                                                    <div class="wpb_wrapper">
+                                                        <h2 style="text-align: center;"><span style="color: #000000;">Why Deep Decorators</span></h2>
+                                                        <p style="text-align: center;"><span style="color: #000000;">Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users.</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="vc_col-sm-4 equal-height wpb_column column_container vc_custom_1433830445334">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top vc_align_center default">
+                                                    <div class="wpb_wrapper"> <img class=" vc_box_border_grey " src="http://hnd-demo.detheme.com/logocentered/wp-content/uploads/sites/19/2015/05/thumbnail-grywhite02-257x257.jpg" width="257" height="257" alt="thumbnail-grywhite02" title="thumbnail-grywhite02" /> </div>
+                                                </div>
+                                                <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                    <div class="wpb_wrapper">
+                                                        <h2 style="text-align: center;"><span style="color: #000000;">Vision &amp; Mission</span></h2>
+                                                        <p style="text-align: center;"><span style="color: #000000;">Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users.</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="vc_col-sm-4 equal-height wpb_column column_container vc_custom_1433830453062">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left vc_align_center default">
+                                                    <div class="wpb_wrapper"> <img class=" vc_box_border_grey " src="http://hnd-demo.detheme.com/logocentered/wp-content/uploads/sites/19/2015/05/thumbnail-grywhite03-257x257.jpg" width="257" height="257" alt="thumbnail-grywhite03" title="thumbnail-grywhite03" /> </div>
+                                                </div>
+                                                <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left">
+                                                    <div class="wpb_wrapper">
+                                                        <h2 style="text-align: center;"><span style="color: #000000;">Our Values</span></h2>
+                                                        <p style="text-align: center;"><span style="color: #000000;">Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users.</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container dt-container">
+                                <div id="project" class="wpb_row vc_row-fluid vc_custom_1434594202563">
+                                    <div class="vc_col-sm-6 wpb_column column_container vc_custom_1432890172395">
+                                        <div class="wpb_wrapper">
+                                            <div id="section-2" class="dt-section-head left size-xlarge" dir="ltr" data-uk-scrollspy="{cls:'uk-animation-slide-left', delay:300}">
+                                                <div>
+                                                    <h2 style="color:#000000" class="section-main-title">Latest project </h2></div>
+                                            </div>
+                                            <div class="wpb_text_column wpb_content_element vc_custom_1434599608842 wpb_animate_when_almost_visible wpb_left-to-right">
+                                                <div class="wpb_wrapper">
+                                                    <p style="text-align: left; font-family: lora; font-size: 24px; font-style: italic;"><span style="color: #929292;">We believe in long term design value, which we acheive by selecting quality pieces and through timeless design. </span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="vc_col-sm-6 wpb_column column_container">
+                                        <div class="wpb_wrapper">
+                                            <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left">
+                                                <div class="wpb_wrapper">
+                                                    <p>Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.Completely synergize resource sucking relationships via premier niche markets. Professionally cultivate one-to-one.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container dt-container">
+                                <div class="wpb_row vc_row-fluid vc_custom_1434593869839">
+                                    <div class="vc_col-sm-12 wpb_column column_container vc_custom_1433298565156">
+                                        <div class="wpb_wrapper">
+
+                                            
+                                            <article class="myportfolio-container hnd" id="esg-grid-4-1-wrap">
+                                                <div id="esg-grid-4-1" class="esg-grid" style="background-color: transparent;padding: 0px 0px 0px 0px ; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;">
+                                                    <ul>
+                                                        <li class="filterall filter-project eg-portfolios-wrapper eg-post-id-245" data-date="1433388386" data-cobblesw="1" data-cobblesh="1">
+                                                            <div class="esg-media-cover-wrapper">
+                                                                <div class="esg-entry-media"><img src="/wp-content/uploads/sites/19/2015/05/mandap1.jpg" alt=""></div>
+                                                                <div class="esg-entry-cover esg-fade" data-delay="0">
+                                                                    <div class="esg-overlay esg-slidedown eg-portfolios-container" data-delay="0"></div>
+                                                                    <div class="esg-bottom eg-post-245 eg-handlehideunder eg-portfolios-element-8-a esg-slideshortdown" data-delay="0.4" data-hideunder="350" data-hidetype="display"><a class="eg-portfolios-element-8 eg-post-245" href="/services/mandap" target="_self">View Detail</a></div>
+                                                                    <div class="esg-center eg-post-245 eg-handlehideunder eg-portfolios-element-9 esg-slideshortdown" data-delay="0.3" data-hideunder="350" data-hidetype="display">Mandap Design</div>
+                                                                    <div class="esg-center eg-post-245 eg-portfolios-element-2-a esg-slideshortdown" data-delay="0.35"><a class="eg-portfolios-element-2 eg-post-245" href="/services/mandap" target="_self">Bloomfield St.</a></div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="filterall filter-project eg-portfolios-wrapper eg-post-id-250" data-date="1433397799" data-cobblesw="1" data-cobblesh="1">
+                                                            <div class="esg-media-cover-wrapper">
+                                                                <div class="esg-entry-media"><img src="/wp-content/uploads/sites/19/2015/05/gate1.jpg" alt=""></div>
+                                                                <div class="esg-entry-cover esg-fade" data-delay="0">
+                                                                    <div class="esg-overlay esg-slidedown eg-portfolios-container" data-delay="0"></div>
+                                                                    <div class="esg-bottom eg-post-250 eg-handlehideunder eg-portfolios-element-8-a esg-slideshortdown" data-delay="0.4" data-hideunder="350" data-hidetype="display"><a class="eg-portfolios-element-8 eg-post-250" href="/services/gate" target="_self">View Detail</a></div>
+                                                                    <div class="esg-center eg-post-250 eg-handlehideunder eg-portfolios-element-9 esg-slideshortdown" data-delay="0.3" data-hideunder="350" data-hidetype="display">Custom Built-Ins</div>
+                                                                    <div class="esg-center eg-post-250 eg-portfolios-element-2-a esg-slideshortdown" data-delay="0.35"><a class="eg-portfolios-element-2 eg-post-250" href="/services/gate" target="_self">Gate Design</a></div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="filterall filter-project eg-portfolios-wrapper eg-post-id-251" data-date="1433397825" data-cobblesw="1" data-cobblesh="1">
+                                                            <div class="esg-media-cover-wrapper">
+                                                                <div class="esg-entry-media"><img src="/wp-content/uploads/sites/19/2015/05/entry1.jpg" alt=""></div>
+                                                                <div class="esg-entry-cover esg-fade" data-delay="0">
+                                                                    <div class="esg-overlay esg-slidedown eg-portfolios-container" data-delay="0"></div>
+                                                                    <div class="esg-bottom eg-post-251 eg-handlehideunder eg-portfolios-element-8-a esg-slideshortdown" data-delay="0.4" data-hideunder="350" data-hidetype="display"><a class="eg-portfolios-element-8 eg-post-251" href="/services/gate" target="_self">View Detail</a></div>
+                                                                    <div class="esg-center eg-post-251 eg-handlehideunder eg-portfolios-element-9 esg-slideshortdown" data-delay="0.3" data-hideunder="350" data-hidetype="display">Window Treatments</div>
+                                                                    <div class="esg-center eg-post-251 eg-portfolios-element-2-a esg-slideshortdown" data-delay="0.35"><a class="eg-portfolios-element-2 eg-post-251" href="http://hnd-demo.detheme.com/logocentered/portfolio/porject-detail-3/" target="_self">Wedding Entry Deisgn</a></div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="filterall filter-project eg-portfolios-wrapper eg-post-id-252" data-date="1433397897" data-cobblesw="1" data-cobblesh="1">
+                                                            <div class="esg-media-cover-wrapper">
+                                                                <div class="esg-entry-media"><img src="/wp-content/uploads/sites/19/2015/05/chori4.jpg" alt=""></div>
+                                                                <div class="esg-entry-cover esg-fade" data-delay="0">
+                                                                    <div class="esg-overlay esg-slidedown eg-portfolios-container" data-delay="0"></div>
+                                                                    <div class="esg-bottom eg-post-252 eg-handlehideunder eg-portfolios-element-8-a esg-slideshortdown" data-delay="0.4" data-hideunder="350" data-hidetype="display"><a class="eg-portfolios-element-8 eg-post-252" href="/services/chori" target="_self">View Detail</a></div>
+                                                                    <div class="esg-center eg-post-252 eg-handlehideunder eg-portfolios-element-9 esg-slideshortdown" data-delay="0.3" data-hideunder="350" data-hidetype="display">Antiques, Artwork & Objects</div>
+                                                                    <div class="esg-center eg-post-252 eg-portfolios-element-2-a esg-slideshortdown" data-delay="0.35"><a class="eg-portfolios-element-2 eg-post-252" href="/services/gate" target="_self">Wedding Chori Design</a></div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="filterall filter-project eg-portfolios-wrapper eg-post-id-588" data-date="1433909115" data-cobblesw="1" data-cobblesh="1">
+                                                            <div class="esg-media-cover-wrapper">
+                                                                <div class="esg-entry-media"><img src="/wp-content/uploads/sites/19/2015/05/theme-design1.jpg" alt=""></div>
+                                                                <div class="esg-entry-cover esg-fade" data-delay="0">
+                                                                    <div class="esg-overlay esg-slidedown eg-portfolios-container" data-delay="0"></div>
+                                                                    <div class="esg-bottom eg-post-588 eg-handlehideunder eg-portfolios-element-8-a esg-slideshortdown" data-delay="0.4" data-hideunder="350" data-hidetype="display"><a class="eg-portfolios-element-8 eg-post-588" href="/services/theme-design" target="_self">View Detail</a></div>
+                                                                    <div class="esg-center eg-post-588 eg-handlehideunder eg-portfolios-element-9 esg-slideshortdown" data-delay="0.3" data-hideunder="350" data-hidetype="display">Outdoor Living Spaces</div>
+                                                                    <div class="esg-center eg-post-588 eg-portfolios-element-2-a esg-slideshortdown" data-delay="0.35"><a class="eg-portfolios-element-2 eg-post-588" href="/services/gate" target="_self">Theme Design</a></div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="filterall filter-project eg-portfolios-wrapper eg-post-id-589" data-date="1433909244" data-cobblesw="1" data-cobblesh="1">
+                                                            <div class="esg-media-cover-wrapper">
+                                                                <div class="esg-entry-media"><img src="/wp-content/uploads/sites/19/2015/05/stage2.jpg" alt=""></div>
+                                                                <div class="esg-entry-cover esg-fade" data-delay="0">
+                                                                    <div class="esg-overlay esg-slidedown eg-portfolios-container" data-delay="0"></div>
+                                                                    <div class="esg-bottom eg-post-589 eg-handlehideunder eg-portfolios-element-8-a esg-slideshortdown" data-delay="0.4" data-hideunder="350" data-hidetype="display"><a class="eg-portfolios-element-8 eg-post-589" href="/services/stage" target="_self">View Detail</a></div>
+                                                                    <div class="esg-center eg-post-589 eg-handlehideunder eg-portfolios-element-9 esg-slideshortdown" data-delay="0.3" data-hideunder="350" data-hidetype="display">Accessories, Lamps & Fixtures</div>
+                                                                    <div class="esg-center eg-post-589 eg-portfolios-element-2-a esg-slideshortdown" data-delay="0.35"><a class="eg-portfolios-element-2 eg-post-589" href="/services/stage" target="_self">Reception Stage Design</a></div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </article>
+                                            <div class="clear"></div>
+                                            <script type="text/javascript">
+                                                function eggbfc(winw, resultoption) {
+                                                    var lasttop = winw,
+                                                        lastbottom = 0,
+                                                        smallest = 9999,
+                                                        largest = 0,
+                                                        samount = 0,
+                                                        lamoung = 0,
+                                                        lastamount = 0,
+                                                        resultid = 0,
+                                                        resultidb = 0,
+                                                        responsiveEntries = [{
+                                                            width: 1400,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 1170,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 1024,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 960,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 778,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 640,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 480,
+                                                            amount: 1
+                                                        }];
+                                                    if (responsiveEntries != undefined && responsiveEntries.length > 0)
+                                                        jQuery.each(responsiveEntries, function(index, obj) {
+                                                            var curw = obj.width != undefined ? obj.width : 0,
+                                                                cura = obj.amount != undefined ? obj.amount : 0;
+                                                            if (smallest > curw) {
+                                                                smallest = curw;
+                                                                samount = cura;
+                                                                resultidb = index;
+                                                            }
+                                                            if (largest < curw) {
+                                                                largest = curw;
+                                                                lamount = cura;
+                                                            }
+                                                            if (curw > lastbottom && curw <= lasttop) {
+                                                                lastbottom = curw;
+                                                                lastamount = cura;
+                                                                resultid = index;
+                                                            }
+                                                        })
+                                                    if (smallest > winw) {
+                                                        lastamount = samount;
+                                                        resultid = resultidb;
+                                                    }
+                                                    var obj = new Object;
+                                                    obj.index = resultid;
+                                                    obj.column = lastamount;
+                                                    if (resultoption == "id")
+                                                        return obj;
+                                                    else
+                                                        return lastamount;
+                                                }
+                                                if ("cobbles" == "even") {
+                                                    var coh = 0,
+                                                        container = jQuery("#esg-grid-4-1");
+                                                    var cwidth = container.width(),
+                                                        ar = "4:3",
+                                                        gbfc = eggbfc(jQuery(window).width(), "id"),
+                                                        row = 4;
+                                                    ar = ar.split(":");
+                                                    aratio = parseInt(ar[0], 0) / parseInt(ar[1], 0);
+                                                    coh = cwidth / aratio;
+                                                    coh = coh / gbfc.column * row;
+                                                    var ul = container.find("ul").first();
+                                                    ul.css({
+                                                        display: "block",
+                                                        height: coh + "px"
+                                                    });
+                                                }
+                                                var essapi_4;
+                                                jQuery(document).ready(function() {
+                                                    essapi_4 = jQuery("#esg-grid-4-1").tpessential({
+                                                        gridID: 4,
+                                                        layout: "cobbles",
+                                                        forceFullWidth: "off",
+                                                        lazyLoad: "off",
+                                                        row: 4,
+                                                        loadMoreAjaxToken: "25770fcf7f",
+                                                        loadMoreAjaxUrl: "http://hnd-demo.detheme.com/logocentered/wp-admin/admin-ajax.php",
+                                                        loadMoreAjaxAction: "Essential_Grid_Front_request_ajax",
+                                                        ajaxContentTarget: "ess-grid-ajax-container-",
+                                                        ajaxScrollToOffset: "0",
+                                                        ajaxCloseButton: "off",
+                                                        ajaxContentSliding: "on",
+                                                        ajaxScrollToOnLoad: "on",
+                                                        ajaxNavButton: "off",
+                                                        ajaxCloseType: "type1",
+                                                        ajaxCloseInner: "false",
+                                                        ajaxCloseStyle: "light",
+                                                        ajaxClosePosition: "tr",
+                                                        space: 20,
+                                                        pageAnimation: "fade",
+                                                        paginationScrollToTop: "off",
+                                                        spinner: "spinner0",
+                                                        lightBoxMode: "single",
+                                                        cobblesPattern: "1x2,1x1,1x1,2x1,1x1,1x1",
+                                                        animSpeed: 1000,
+                                                        delayBasic: 1,
+                                                        mainhoverdelay: 1,
+                                                        filterType: "single",
+                                                        showDropFilter: "hover",
+                                                        filterGroupClass: "esg-fgc-4",
+                                                        aspectratio: "4:3",
+                                                        responsiveEntries: [{
+                                                            width: 1400,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 1170,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 1024,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 960,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 778,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 640,
+                                                            amount: 2
+                                                        }, {
+                                                            width: 480,
+                                                            amount: 1
+                                                        }]
+                                                    });
+
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-container wpb_row vc_row-fluid vc_custom_detheme9">
+                                <div>
+                                    <div>
+                                        <div class="vc_col-sm-12 wpb_column column_container vc_custom_1433298565156">
+                                            <div class="wpb_wrapper">
+                                                <div class="vc_separator wpb_content_element vc_sep_width_100 vc_sep_border_width_2 vc_sep_pos_align_center vc_separator_no_text"> <span class="vc_sep_holder vc_sep_holder_l"><span style="border-color:rgb(0,0,0);border-color:rgba(0,0,0,0.1);" class="vc_sep_line"></span></span> <span class="vc_sep_holder vc_sep_holder_r"><span style="border-color:rgb(0,0,0);border-color:rgba(0,0,0,0.1);" class="vc_sep_line"></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container dt-container">
+                                <div class="wpb_row vc_row-fluid vc_custom_1433305333338">
+                                    <div class="vc_col-sm-12 wpb_column column_container">
+                                        <div class="wpb_wrapper">
+                                            <div class="wpb_row vc_row-fluid">
+                                                <div class="vc_col-sm-5 wpb_column column_container">
+                                                    <div class="wpb_wrapper"> </div>
+                                                </div>
+                                                <div class="vc_col-sm-2 wpb_column column_container">
+                                                    <div class="wpb_wrapper">
+                                                        <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_top-to-bottom">
+                                                            <div class="wpb_wrapper">
+                                                                <p>
+                                                                    <a href="http://hnd-demo.detheme.com/wp-content/uploads/2015/05/quote-icon-transp.png"><img class=" wp-image-121 aligncenter" src="http://hnd-demo.detheme.com/wp-content/uploads/2015/05/quote-icon-transp.png" alt="quote-icon-transp" width="108" height="108" /></a>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="vc_col-sm-5 wpb_column column_container">
+                                                    <div class="wpb_wrapper"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="owl-carousel-container" dir="ltr">
+                                                <div class="owl-carousel" id="dt_carousel1">
+                                                    <div class="owl-slide">
+                                                        <div class="wpb_row vc_row-fluid">
+                                                            <div class="vc_col-sm-2 wpb_column column_container">
+                                                                <div class="wpb_wrapper"> </div>
+                                                            </div>
+                                                            <div class="vc_col-sm-8 wpb_column column_container">
+                                                                <div class="wpb_wrapper">
+                                                                    <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                        <div class="wpb_wrapper">
+                                                                            <p style="text-align: center; font-family: lora; font-size: 30px; font-style: italic;"><span style="color: #000000;">With Deep Decorators, I&#8217;m part of the creative process. So not only is my interior design unique, it&#8217;s also uniquely me. The end result is not merely a design statement, but a reflection of my identity</span></p>
+                                                                            <h3 style="text-align: center; margin-top: 60px;"><span style="color: #000000;">Martha Stanley</span></h3>
+                                                                            <p style="text-align: center;"><span style="color: #000000;">South Carolina</span></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vc_col-sm-1 wpb_column column_container vc_custom_1433386496185">
+                                                                <div class="wpb_wrapper"> </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="owl-slide">
+                                                        <div class="wpb_row vc_row-fluid">
+                                                            <div class="vc_col-sm-2 wpb_column column_container">
+                                                                <div class="wpb_wrapper"> </div>
+                                                            </div>
+                                                            <div class="vc_col-sm-8 wpb_column column_container">
+                                                                <div class="wpb_wrapper">
+                                                                    <div class="wpb_text_column wpb_content_element">
+                                                                        <div class="wpb_wrapper">
+                                                                            <p style="text-align: center; font-family: lora; font-size: 30px; font-style: italic;"><span style="color: #000000;">H&amp;D was super to work with from concept to final product. Their keen eye and expert design sense is beyond compare. They were such fun to work with as well as being a true professional</span></p>
+                                                                            <h3 style="text-align: center; margin-top: 60px;"><span style="color: #000000;">Sergio Ramos</span></h3>
+                                                                            <p style="text-align: center;"><span style="color: #000000;">Central Madrid</span></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vc_col-sm-2 wpb_column column_container">
+                                                                <div class="wpb_wrapper"> </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="owl-slide">
+                                                        <div class="wpb_row vc_row-fluid">
+                                                            <div class="vc_col-sm-2 wpb_column column_container">
+                                                                <div class="wpb_wrapper"> </div>
+                                                            </div>
+                                                            <div class="vc_col-sm-8 wpb_column column_container">
+                                                                <div class="wpb_wrapper">
+                                                                    <div class="wpb_text_column wpb_content_element">
+                                                                        <div class="wpb_wrapper">
+                                                                            <p style="text-align: center; font-family: lora; font-size: 30px; font-style: italic;"><span style="color: #000000;">H&amp;D listened to our ideas, determined our style tastes and came up with a complete solution which included furniture, fabric, paint, artwork, kitchen/bathroom materials and hardware</span></p>
+                                                                            <h3 style="text-align: center; margin-top: 60px;"><span style="color: #000000;">Rob Martin</span></h3>
+                                                                            <p style="text-align: center;"><span style="color: #000000;">New York</span></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vc_col-sm-2 wpb_column column_container">
+                                                                <div class="wpb_wrapper"> </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="owl-custom-pagination"><span class="btn-owl prev page"><i class="icon-angle-left"></i></span> <span class="page">/</span> <span class="btn-owl next page"><i class="icon-angle-right"></i></span></div>
+                                            </div>
+                                            <script type="text/javascript">
+                                                jQuery(document).ready(function($) {
+                                                    'use strict';
+
+                                                    var dt_carousel1 = jQuery("#dt_carousel1");
+                                                    try {
+                                                        dt_carousel1.owlCarousel({
+                                                            items: 1,
+                                                            itemsDesktop: [1200, 1],
+                                                            itemsDesktopSmall: [1023, 1], // 3 items betweem 900px and 601px
+                                                            itemsTablet: [768, 1], //2 items between 600 and 0;
+                                                            itemsMobile: [600, 1], // itemsMobile disabled - inherit from itemsTablet option
+                                                            pagination: false,
+                                                            slideSpeed: 800,
+                                                            paginationSpeed: 800,
+                                                            rewindSpeed: 800,
+                                                            afterInit: function(el) {
+                                                                var $base = el;
+                                                                $('.owl-custom-pagination .next', $base.parent()).click(function() {
+                                                                    $base.trigger('owl.next');
+                                                                });
+                                                                $('.owl-custom-pagination .prev', $base.parent()).click(function() {
+                                                                    $base.trigger('owl.prev');
+                                                                });
+
+                                                            }
+                                                        });
+                                                    } catch (err) {}
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="quote" class="box-container wpb_row vc_row-fluid vc_custom_1434592713052">
+                                <div class="container dt-container">
+                                    <div class="row">
+                                        <div class="vc_col-sm-12 wpb_column column_container">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_row vc_row-fluid">
+                                                    <div class="vc_col-sm-3 wpb_column column_container">
+                                                        <div class="wpb_wrapper"> </div>
+                                                    </div>
+                                                    <div class="vc_col-sm-6 wpb_column column_container">
+                                                        <div class="wpb_wrapper">
+                                                            <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_appear">
+                                                                <div class="wpb_wrapper">
+                                                                    <h2 style="text-align: center;">
+																		<a href="/">
+																			<img class="alignnone wp-image-44" src="../wp-content/uploads/sites/19/2015/05/shell-diya.png" alt="logo" style="height: 128px;">
+																		</a>
+																	</h2>
+                                                                    <h2 style="text-align: center; margin-top: 50px;"><span style="color: #ffffff;">Let&#8217;s Hear you!</span></h2>
+                                                                    <p style="text-align: center; margin-top: 20px; font-size: 24px; font-family: lora; font-style: italic;"><span style="color: #ffffff;">Ready to take it a step further? Let’s start talking about your project or idea and find out how we can help you.</span></p>
+                                                                    <p style="text-align: center; margin-top: 30px;"><a href="/request-quote/" class="btn btn-lg btn-color-primary skin-light" target="_self">Request a free quote</a></p>
+                                                                    <p style="text-align: center;"><span style="color: #ffffff;"><a style="color: #ffffff;" href="#"><i class="dt-icon icon-social-facebook43"></i></a>   <a style="color: #ffffff;" href="#"><i class="dt-icon icon-social-twitter35"></i> </a>  <a style="color: #ffffff;" href="#"><i class="dt-icon icon-social-google109"></i> </a>  <a style="color: #ffffff;" href="#"><i class="dt-icon icon-social-pinterest26"></i></a></span></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="vc_col-sm-3 wpb_column column_container">
+                                                        <div class="wpb_wrapper"> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="dt-popup-full" id="request-quote"><a class="btn popup-close" href="#">Close</a>
+                                                    <div class="wpb_row vc_row-fluid height-100-vh vc_custom_1434349188083">
+                                                        <div class="vc_col-sm-12 fullscreen-popup-container wpb_column column_container">
+                                                            <div class="wpb_wrapper">
+                                                                <div id="section-3" class="dt-section-head center size-default" dir="ltr">
+                                                                    <div>
+                                                                        <h2 style="color:#ffffff" class="section-main-title">REquest A Free Quote</h2></div>
+                                                                </div>
+                                                                <div class="wpb_text_column wpb_content_element text-white">
+                                                                    <div class="wpb_wrapper">
+                                                                        <p style="text-align: center;">Curabitur blandit tempus porttitor.<br /> Sed posuere consectetur est at lobortis.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div role="form" class="wpcf7" id="wpcf7-f1023-p5-o1" lang="en-US" dir="ltr">
+                                                                    <div class="screen-reader-response"></div>
+                                                                    <form name="" action="/logocentered/#wpcf7-f1023-p5-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+                                                                        <div style="display: none;"> <input type="hidden" name="_wpcf7" value="1023" /> <input type="hidden" name="_wpcf7_version" value="4.2" /> <input type="hidden" name="_wpcf7_locale" value="en_US" /> <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f1023-p5-o1" /> <input type="hidden" name="_wpnonce" value="028f0b419d" /> </div>
+                                                                        <div class="row hnd-request-form">
+                                                                            <h2>What Are You Looking For?</h2>
+                                                                            <div class="col-sm-6"> <span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Name" /></span><br /> <span class="wpcf7-form-control-wrap your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Email" /></span><br /> <span class="wpcf7-form-control-wrap interest"><input type="text" name="interest" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" placeholder="What are you interested in?" /></span><br /> <span class="wpcf7-form-control-wrap additional-service"><input type="text" name="additional-service" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" placeholder="Do you need additional service?" /></span><br /> <span class="wpcf7-form-control-wrap deadline"><input type="text" name="deadline" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" placeholder="What&#039;s your deadline?" /></span> </div>
+                                                                            <div class="col-sm-6"> <span class="wpcf7-form-control-wrap your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false" placeholder="Additional Information"></textarea></span> </div>
+                                                                            <p> <input type="submit" value="Submit" class="wpcf7-form-control wpcf7-submit" /> </p>
+                                                                        </div>
+                                                                        <div class="wpcf7-response-output wpcf7-display-none"></div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-container wpb_row vc_row-fluid vc_custom_1434592732678">
+                    <div class="container dt-container">
+                        <div class="row">
+                            <div class="vc_col-sm-12 wpb_column column_container">
+                                <div class="wpb_wrapper">
+                                    <div class="wpb_row vc_row-fluid vc_custom_1434591837029">
+                                        <div class="vc_col-sm-6 wpb_column column_container vc_custom_1434433962853">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_text_column wpb_content_element xs-text-center">
+                                                    <div class="wpb_wrapper">
+                                                        <h3><span style="color: #ffffff;">HEAD OFFICE</span></h3>
+                                                        <p><span style="color: #ffffff;">Deep Decorators</span></p>
+                                                        <p><span style="color: #ffffff;">22 N 12th St New York, NY</span></p>
+                                                        <p><span style="color: #ffffff;">contact@yoursite.com</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="vc_col-sm-6 wpb_column column_container vc_custom_1434597667428">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_text_column wpb_content_element xs-text-center">
+                                                    <div class="wpb_wrapper">
+                                                        <h3 style="text-align: right;"><span style="color: #ffffff;">REPRESENTATIVE OFFICE</span></h3>
+                                                        <p style="text-align: right;"><span style="color: #ffffff;">Deep Decorators</span></p>
+                                                        <p style="text-align: right;"><span style="color: #ffffff;">Bolder Folsom Ave, Suite 600, San Francisco</span></p>
+                                                        <p style="text-align: right;"><span style="color: #ffffff;">contact@yoursite.com</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wpb_row vc_row-fluid vc_custom_1434596988705">
+                                        <div class="vc_col-sm-12 wpb_column column_container">
+                                            <div class="wpb_wrapper">
+                                                <div class="vc_separator wpb_content_element vc_sep_width_100 vc_sep_pos_align_center vc_separator_no_text"> <span class="vc_sep_holder vc_sep_holder_l"><span style="border-color:rgb(255,255,255);border-color:rgba(255,255,255,0.2);" class="vc_sep_line"></span></span> <span class="vc_sep_holder vc_sep_holder_r"><span style="border-color:rgb(255,255,255);border-color:rgba(255,255,255,0.2);" class="vc_sep_line"></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wpb_row vc_row-fluid vc_custom_1434596980787">
+                                        <div class="vc_col-sm-6 wpb_column column_container">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_text_column wpb_content_element xs-text-center">
+                                                    <div class="wpb_wrapper">
+                                                        <p style="text-align: left; font-size: 14px;"><span style="color: #999999;">© 2016 Deep Decorators. By Rachit Sakhidas</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="vc_col-sm-6 wpb_column column_container">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_text_column wpb_content_element xs-text-center">
+                                                    <div class="wpb_wrapper">
+                                                        <p style="text-align: right; font-size: 14px;"><span style="color: #999999;">Design-crafted in HTML5/CSS3</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--[if IE 9]> <link property rel='stylesheet' id='scroll-spy-ie-css' href='http://hnd-demo.detheme.com/logocentered/wp-content/plugins/hnd-vc-addon//css/scroll_spy_ie9.css' type='text/css' media='all' /> <![endif]-->
+    
+    
+    <script type='text/javascript' src='/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var _wpcf7 = {
+            "loaderUrl": "http:\/\/hnd-demo.detheme.com\/logocentered\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif",
+            "sending": "Sending ..."
+        };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='/wp-content/plugins/contact-form-7/includes/js/scripts.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/woocommerce/assets/js/select2/select2.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.js'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var woocommerce_params = {
+            "ajax_url": "\/logocentered\/wp-admin\/admin-ajax.php"
+        };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/woocommerce/assets/js/jquery-cookie/jquery.cookie.js'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var wc_cart_fragments_params = {
+            "ajax_url": "\/logocentered\/wp-admin\/admin-ajax.php",
+            "fragment_name": "wc_fragments"
+        };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.js'></script>
+    <script type='text/javascript' src='/wp-content/themes/hnd/js/modernizr.js'></script>
+    <script type='text/javascript' src='/wp-content/themes/hnd/js/bootstrap.js'></script>
+    <script type='text/javascript' src='/wp-content/themes/hnd/js/myscript.js'></script>
+    <script type='text/javascript' src='/wp-content/themes/hnd/js/select.js'></script>
+    <script type='text/javascript' src='/wp-content/themes/hnd/js/select.init.js'></script>
+    <script type='text/javascript' src='/wp-content/themes/hnd/js/jquery.appear.js'></script>
+    <script type='text/javascript' src='/wp-content/themes/hnd/js/jquery.counto.js'></script>
+    <script type='text/javascript' src='/wp-content/themes/hnd/js/comment-reply.min.js'></script>
+    <script type='text/javascript' src='/wp-content/themes/hnd/js/paspartu.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/js_composer/assets/js/js_composer_front.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/hnd-vc-addon/js/uilkit.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/hnd-vc-addon/js/scrollspy.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/js_composer/assets/lib/waypoints/waypoints.min.js'></script>
+    <script type='text/javascript' src='/wp-content/plugins/hnd-vc-addon/js/owl.carousel.js'></script>
+    
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('head').append('<style type="text/css">.dt-megamenu-custom-width-1549{ width:750px !important; }@media ( max-width:991px ) {.dt-megamenu-custom-width-1549{ width:270px !important; }}#megamenu_bg_1549 {background: url(http://hnd-demo.detheme.com/wp-content/uploads/2015/06/mega-menu-portfolio05.jpg)   no-repeat;}@media ( max-width:990px ) { #megamenu_bg_1549 {background: none;}}.dt-megamenu-custom-width-1560{ width:500px !important; }@media ( max-width:991px ) {.dt-megamenu-custom-width-1560{ width:270px !important; }}#megamenu_bg_1560 {background: url(http://hnd-demo.detheme.com/wp-content/uploads/2015/06/mega-menu-img2.jpg)   ;}@media ( max-width:990px ) { #megamenu_bg_1560 {background: none;}}.vc_custom_1434524982018{margin-bottom: 0px ;}.vc_custom_1434525323785{margin-top: 100px ;margin-bottom: 100px ;}.vc_custom_1434599444733{margin-top: 60px !important;}.vc_custom_1434099151225{margin-bottom: 40px !important;padding-right: 30px !important;padding-left: 0px !important;}.vc_custom_1434098849221{border-left-width: 1px !important;padding-left: 30px !important;border-left-color: rgba(0,0,0,0.1) !important;border-left-style: solid !important;}.vc_custom_1433729391546{margin-bottom: 0px ;}.vc_custom_1433494649186{padding-right: 0px !important;padding-left: 0px !important;}.vc_custom_1434332818043{margin-top: -1px ;margin-bottom: 0px ;padding-top: 60px ;padding-bottom: 60px ;background-image:url(http://hnd-demo.detheme.com/logocentered/wp-content/uploads/sites/19/2015/05/img-other-services.jpg)!important;background-position: 0% 0%; background-repeat: no-repeat; background-size: cover;}.vc_custom_1433494649186{padding-right: 0px !important;padding-left: 0px !important;}.vc_custom_1433729377418{margin-top: 0px ;}.vc_custom_1433830438575{border-top-width: 1px !important;border-bottom-width: 1px !important;padding-top: 100px !important;padding-right: 100px !important;padding-bottom: 100px !important;padding-left: 100px !important;border-top-color: rgba(0,0,0,0.1) !important;border-top-style: solid !important;border-bottom-color: rgba(0,0,0,0.1) !important;border-bottom-style: solid !important;}.vc_custom_1433830445334{border-top-width: 1px !important;border-right-width: 1px !important;border-bottom-width: 1px !important;border-left-width: 1px !important;padding-top: 100px !important;padding-right: 100px !important;padding-bottom: 100px !important;padding-left: 100px !important;border-left-color: rgba(0,0,0,0.1) !important;border-left-style: solid !important;border-right-color: rgba(0,0,0,0.1) !important;border-right-style: solid !important;border-top-color: rgba(0,0,0,0.1) !important;border-top-style: solid !important;border-bottom-color: rgba(0,0,0,0.1) !important;border-bottom-style: solid !important;}.vc_custom_1433830453062{border-top-width: 1px !important;border-bottom-width: 1px !important;padding-top: 100px !important;padding-right: 100px !important;padding-bottom: 100px !important;padding-left: 100px !important;border-top-color: rgba(0,0,0,0.1) !important;border-top-style: solid !important;border-bottom-color: rgba(0,0,0,0.1) !important;border-bottom-style: solid !important;}.vc_custom_1434594202563{margin-top: 80px ;margin-bottom: 30px ;padding-top: 50px ;}.vc_custom_1434599608842{margin-bottom: 40px !important;}.vc_custom_1432890172395{padding-right: 60px !important;}.vc_custom_1434593869839{margin-bottom: 120px ;}.vc_custom_1433298565156{padding-right: 0px !important;padding-left: 0px !important;}.vc_custom_1433298565156{padding-right: 0px !important;padding-left: 0px !important;}.vc_custom_1433305333338{padding-top: 100px ;padding-bottom: 100px ;}.vc_custom_1433386496185{margin-bottom: 60px !important;}.vc_custom_1434592713052{margin-bottom: 0px ;padding-top: 100px ;padding-bottom: 0px ;background-image:url(http://hnd-demo.detheme.com/logocentered/wp-content/uploads/sites/19/2015/05/shutterstock_66167818x.jpg)!important;background-position: center !important; background-repeat: no-repeat !important; background-size: cover!important;background-attachment: fixed !important;}.vc_custom_1434349188083{padding-top: 40px ;padding-bottom: 40px ;background-color: #38a4b4 ;}.vc_custom_1434592732678{margin-bottom: 0px ;padding-top: 40px ;padding-bottom: 30px ;background-image:url(http://hnd-demo.detheme.com/logocentered/wp-content/uploads/sites/19/2015/05/shutterstock_66167818x.jpg)!important;background-position: center !important; background-repeat: no-repeat !important; background-size: cover!important;background-attachment: fixed !important;}.vc_custom_1434591837029{margin-top: 50px ;margin-bottom: 0px ;}.vc_custom_1434433962853{margin-bottom: 30px !important;}.vc_custom_1434597667428{margin-bottom: 30px !important;}.vc_custom_1434596988705{margin-bottom: 0px ;}.vc_custom_1434596980787{margin-top: 20px ;}</style>');
+        });
+    </script>
+    <div class="jquery-media-detect"></div>
+</body>
+
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<!--[if IE 7]> <html class="ie ie7" lang="en-US"> <![endif]-->
+<!--[if IE 8]> <html class="ie ie8" lang="en-US"> <![endif]-->
+<!--[if !(IE 7) | !(IE 8) ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<!-- Mirrored from hnd-demo.detheme.com/logocentered/about-us/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Aug 2016 10:14:10 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>About | Deep Decorators</title>
+	<link rel="shortcut icon" type="image/png" href="../../wp-content/uploads/2015/06/fav-icons.png">
+    
+    <link property rel='stylesheet' id='detheme-vc-css' href='../wp-content/plugins/hnd-vc-addon/css/plugin_style.css' type='text/css' media='all' />
+    <link property rel='stylesheet' id='js_composer_front-css' href='../wp-content/plugins/js_composer/assets/css/js_composer.css' type='text/css' media='all' />
+	<style type="text/css">
+        @import url(/wp-content/themes/hnd/css/bootstrap.css);
+        @import url(/wp-content/themes/hnd/css/flaticon.css);
+        @import url(http://fonts.googleapis.com/css?family=Open+Sans:100,300,400,300italic,600,700);
+        @import url(http://fonts.googleapis.com/css?family=Montserrat:100,300,400,300italic,400italic,600,700,800&#038;subset=latin);
+        @import url(http://fonts.googleapis.com/css?family=Montserrat&#038;subset=latin);
+        @import url(http://fonts.googleapis.com/css?family=Lora:100,300,400,300italic,400italic,600,700);
+        @import url(/wp-content/themes/hnd/css/hnd.css);
+        @import url(/wp-content/themes/hnd/css/customstyle-site19.css);
+		section#banner-section {
+            background: url(/wp-content/uploads/sites/19/2015/05/about-us1.jpg) no-repeat 50% 50%;
+            max-height: 100%;
+            background-size: cover;
+            min-height: 300px;
+            height: 300px;
+        }
+		
+		.overlay {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100%;
+			opacity: 0.45;
+			background: #000;
+		}
+        
+        div#head-page #dt-menu.dt-menu-center ul li.logo-desktop a {
+            margin-top: 17px;
+        }
+        
+        div#head-page #dt-menu.dt-menu-left ul li.logo-desktop a {
+            margin-top: 17px;
+        }
+        
+        div#head-page #dt-menu.dt-menu-leftbar ul li.logo-desktop a {
+            margin-top: 17px;
+        }
+        
+        div#head-page #dt-menu.dt-menu-right ul li.logo-desktop a {
+            margin-top: 17px;
+        }
+    </style>
+	<link property rel='stylesheet' id='custom-inline-style' href='../wp-content/plugins/custom-inline-style.css' type='text/css' media='all' />
+	
+	<script type="text/javascript">
+        var ajaxurl = '../wp-admin/admin-ajax.html';
+        var themecolor = '#38a4b4';
+    </script>
+    <script type='text/javascript' src='../wp-includes/js/jquery/jquery.js'></script>
+    <script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/hnd-report-post/js/report.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/hnd-vc-addon/js/script.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/essential-grid/public/assets/js/lightbox.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/essential-grid/public/assets/js/jquery.themepunch.tools.min.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/essential-grid/public/assets/js/jquery.themepunch.essential.min.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/revslider/rs-plugin/js/jquery.themepunch.revolution.min.js'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var wc_add_to_cart_params = {
+            "ajax_url": "\/logocentered\/wp-admin\/admin-ajax.php",
+            "i18n_view_cart": "View Cart",
+            "cart_url": "",
+            "is_cart": "",
+            "cart_redirect_after_add": "no"
+        };
+        /* ]]> */
+    </script>
+    
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            // CUSTOM AJAX CONTENT LOADING FUNCTION
+            var ajaxRevslider = function(obj) {
+
+                // obj.type : Post Type
+                // obj.id : ID of Content to Load
+                // obj.aspectratio : The Aspect Ratio of the Container / Media
+                // obj.selector : The Container Selector where the Content of Ajax will be injected. It is done via the Essential Grid on Return of Content
+
+                var content = "";
+
+                data = {};
+
+                data.action = 'revslider_ajax_call_front';
+                data.client_action = 'get_slider_html';
+                data.token = '74452b2f74';
+                data.type = obj.type;
+                data.id = obj.id;
+                data.aspectratio = obj.aspectratio;
+
+                // SYNC AJAX REQUEST
+                jQuery.ajax({
+                    type: "post",
+                    url: "http://hnd-demo.detheme.com/logocentered/wp-admin/admin-ajax.php",
+                    dataType: 'json',
+                    data: data,
+                    async: false,
+                    success: function(ret, textStatus, XMLHttpRequest) {
+                        if (ret.success == true)
+                            content = ret.data;
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }
+                });
+
+                // FIRST RETURN THE CONTENT WHEN IT IS LOADED !!
+                return content;
+            };
+
+            // CUSTOM AJAX FUNCTION TO REMOVE THE SLIDER
+            var ajaxRemoveRevslider = function(obj) {
+                return jQuery(obj.selector + " .rev_slider").revkill();
+            };
+
+            // EXTEND THE AJAX CONTENT LOADING TYPES WITH TYPE AND FUNCTION
+            var extendessential = setInterval(function() {
+                if (jQuery.fn.tpessential != undefined) {
+                    clearInterval(extendessential);
+                    if (typeof(jQuery.fn.tpessential.defaults) !== 'undefined') {
+                        jQuery.fn.tpessential.defaults.ajaxTypes.push({
+                            type: "revslider",
+                            func: ajaxRevslider,
+                            killfunc: ajaxRemoveRevslider,
+                            openAnimationSpeed: 0.3
+                        });
+                        // type:  Name of the Post to load via Ajax into the Essential Grid Ajax Container
+                        // func: the Function Name which is Called once the Item with the Post Type has been clicked
+                        // killfunc: function to kill in case the Ajax Window going to be removed (before Remove function !
+                        // openAnimationSpeed: how quick the Ajax Content window should be animated (default is 0.3)
+                    }
+                }
+            }, 30);
+        });
+    </script>
+    <script type="text/javascript">
+        (function(url) {
+            if (/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)) {
+                return;
+            }
+            var addEvent = function(evt, handler) {
+                if (window.addEventListener) {
+                    document.addEventListener(evt, handler, false);
+                } else if (window.attachEvent) {
+                    document.attachEvent('on' + evt, handler);
+                }
+            };
+            var removeEvent = function(evt, handler) {
+                if (window.removeEventListener) {
+                    document.removeEventListener(evt, handler, false);
+                } else if (window.detachEvent) {
+                    document.detachEvent('on' + evt, handler);
+                }
+            };
+            var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+            var logHuman = function() {
+                var wfscr = document.createElement('script');
+                wfscr.type = 'text/javascript';
+                wfscr.async = true;
+                wfscr.src = url + '&r=' + Math.random();
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(wfscr);
+                for (var i = 0; i < evts.length; i++) {
+                    removeEvent(evts[i], logHuman);
+                }
+            };
+            for (var i = 0; i < evts.length; i++) {
+                addEvent(evts[i], logHuman);
+            }
+        })('../index160f.html?wordfence_logHuman=1&amp;hid=CBDAFF9B379845E3EDDD76C9D81187BD');
+    </script>
+   
+</head>
+
+<body class="page page-id-38 page-template page-template-fullwidth page-template-fullwidth-php dt_custom_body wpb-js-composer js-comp-ver-4.5.2 vc_responsive">
+    <div class="paspartu_outer paspartu_on_bottom_fixed body_background_color">
+        <div class="paspartu_inner body_background_color">
+            <div class="container dt-boxed-stretched-container body_background_color"> <input type="checkbox" name="nav" id="main-nav-check">
+                <div class="top-head is-sticky-menu ">
+                    <div id="head-page" class="head-page adminbar-not-here alt reveal notopbar transparent stickysolid menu_background_color">
+                        <div class="container">
+                            <div id="dt-menu" class="dt-menu-middle"><label for="main-nav-check" class="toggle" onclick="" title="Close"><i class="icon-cancel-1"></i></label>
+                                <ul id="menu-main-menu" class="">
+                                   <li id="menu-item-1558" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1558"><a href="/"><span>Home</span></a></li>
+                                    <li id="menu-item-1559" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-38 current_page_item current-menu-item menu-item-1559"><a href="/about-us"><span>About Us</span></a></li>
+                                    
+									<li id="menu-item-1560" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dt-megamenu dt-megamenu-width-set menu-item-1560"><a href="/services"><span>Services</span></a><label for="fof1560" class="toggle-sub" onclick="">&rsaquo;</label> <input id="fof1560" class="sub-nav-check" type="checkbox">
+                                        <ul id="fof-sub-1560" class="sub-nav megamenu-sub dt-megamenu-custom-width-1560">
+                                            <li class="sub-heading"> <label for="fof1560" class="toggle" onclick="" title="Back">&lsaquo; Back</label></li>
+                                            <li>
+                                                <div class="row" id="megamenu_bg_1560">
+                                                    <div class="col-sm-12 menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children megamenu-column menu-item-first-child dt-megamenu-grid">
+                                                        <ul class="dt-megamenu-sub-nav">
+                                                            <li id="menu-item-1523" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-first-child menu-item-1523"><a href="/services/chori"><span>Chori</span></a></li>
+															<li id="menu-item-1525" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-1525"><a href="/services/entry"><span>Entry</span></a></li>
+                                                            <li id="menu-item-1526" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-1526"><a href="/services/stage"><span>Stage</span></a></li>
+                                                            <li id="menu-item-1524" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-1524"><a href="/services/theme-design"><span>Theme Design</span></a></li>
+                                                            <li id="menu-item-1524" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-1524"><a href="/services/gate"><span>Gate</span></a></li>
+                                                            <li id="menu-item-1539" class="menu-item menu-item-type-post_type menu-item-object-dtpost menu-item-1539"><a href="/services/mandap"><span>Mandap</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="logo-desktop hidden-sm hidden-xs">
+                                        <a href="/" style=""><img id="logomenu" src="../wp-content/uploads/sites/19/2015/05/shell-diya.png" alt="hnd" class="img-responsive halfsize" width="80"></a>
+                                        <a href="/" style=""><img id="logomenureveal" src="../wp-content/uploads/sites/19/2015/05/shell-diya.png" alt="hnd" class="img-responsive halfsize" width="80"></a>
+                                    </li>
+                                    <li id="menu-item-1573" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1573"><a href="/gallery"><span>Gallery</span></a></li>
+                                    <li id="menu-item-1571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1571"><a href="/contact-us"><span>Contact Us</span></a></li>
+									<li id="menu-item-1559" style="visibility: hidden;" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-38 current_page_item current-menu-item menu-item-1559"><a href="/about-us/index.html"><span>About Us</span></a></li>
+                                </ul><label class="toggle close-all" onclick="uncheckboxes(&#39;nav&#39;)"><i class="icon-cancel-1"></i></label></div>
+							<div class="overlay"></div>
+						</div>
+                        <div class="container">
+                            <div class="row">
+                                <div>
+                                    <div id="mobile-header" class="hidden-sm-max col-sm-12"> 
+										<label for="main-nav-check" class="toggle" onclick="" title="Menu"><i class="icon-menu"></i></label>
+                                        <a href="/">
+											<img id="logomenumobile" src="../wp-content/uploads/sites/19/2015/05/shell-diya.png" 
+												rel="../wp-content/uploads/sites/19/2015/05/shell-diya.png" alt="" class="img-responsive halfsize" width="80" />
+											<img id="logomenurevealmobile" src="../wp-content/uploads/sites/19/2015/05/shell-diya.png" alt="" 
+												class="img-responsive halfsize" width="80" />
+										</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section id="banner-section" class="">
+                    <div class="container no_subtitle">
+                        <div class="row">
+                            <div class="col-xs-12 hide">
+                                <div class="banner-title">
+                                    <h1 class="page-title">About</h1></div>
+                                <div class="breadcrumbs"><span><a href="../index.html" title="Home">Home</a></span>&nbsp;/&nbsp; <span class="current">About</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <h6>&nbsp;</h6> </section>
+                <div class="content post-38 page type-page status-publish hentry">
+                    <div class="nosidebar">
+                        <div class="blank-reveal-area"></div>
+                        <div class="post-article">
+                            <div class="container dt-container">
+                                <div class="wpb_row vc_row-fluid vc_custom_1433315937751">
+                                    <div class="vc_col-sm-12 wpb_column column_container">
+                                        <div class="wpb_wrapper">
+                                            <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top vc_align_center default">
+                                                <div class="wpb_wrapper"> <img width="1200" height="676" src="../wp-content/uploads/sites/19/2015/05/about-us1.png" class=" vc_box_border_grey attachment-full" alt="shutterstock_153544520" /> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container dt-container">
+                                <div class="wpb_row vc_row-fluid vc_custom_1433316216058">
+                                    <div class="vc_col-sm-6 wpb_column column_container">
+                                        <div class="wpb_wrapper">
+                                            <div id="section-1" class="dt-section-head left vc_custom_1434600403159 size-xlarge" dir="ltr" data-uk-scrollspy="{cls:'uk-animation-slide-left', delay:300}">
+                                                <div>
+                                                    <h2 style="color:#000000" class="section-main-title">Hi! Good To See You</h2></div>
+                                            </div>
+                                            <div class="wpb_text_column wpb_content_element vc_custom_1434600413366 wpb_animate_when_almost_visible wpb_left-to-right">
+                                                <div class="wpb_wrapper">
+                                                    <p style="text-align: left; font-family: lora; font-size: 24px; font-style: italic;"><span style="color: #929292;">I have exquisite taste and boundless curiosity to create a masterpiece</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="vc_col-sm-6 wpb_column column_container">
+                                        <div class="wpb_wrapper">
+                                            <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left">
+                                                <div class="wpb_wrapper">
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-container wpb_row vc_row-fluid text-white vc_custom_1433383103635">
+                                <div class="container dt-container hide">
+                                    <div class="row">
+                                        <div class="vc_col-sm-12 wpb_column column_container">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_row vc_row-fluid">
+                                                    <div class="vc_col-sm-3 wpb_column column_container">
+                                                        <div class="wpb_wrapper">
+                                                            <div id="section-2" class="dt-section-head left vc_custom_1434600449489 size-default" dir="ltr" data-uk-scrollspy="{cls:'uk-animation-slide-left', delay:300}">
+                                                                <div>
+                                                                    <h2 style="color:#ffffff" class="section-main-title">Education</h2></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="vc_col-sm-9 wpb_column column_container vc_custom_1433322837860">
+                                                        <div class="wpb_wrapper">
+                                                            <div class="wpb_text_column wpb_content_element col-xs-8 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <h4 style="text-align: left;">Certificate of Marketing &amp; Advertising</h4>
+                                                                    <p style="text-align: left; font-family: lora; font-style: italic;">University of California, Extension</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="wpb_text_column wpb_content_element col-xs-4 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <p style="text-align: left;">2010 &#8211; 2013<br /> Los Angeles, CA</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wpb_row vc_row-fluid">
+                                                    <div class="vc_col-sm-3 wpb_column column_container">
+                                                        <div class="wpb_wrapper"> </div>
+                                                    </div>
+                                                    <div class="vc_col-sm-9 wpb_column column_container vc_custom_1433322837860">
+                                                        <div class="wpb_wrapper">
+                                                            <div class="wpb_text_column wpb_content_element col-xs-8 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <h4 style="text-align: left;">B.F.A. in Graphic Design</h4>
+                                                                    <p style="text-align: left; font-family: lora; font-style: italic;">Woodbury University, School of Media, Culture &amp; Design</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="wpb_text_column wpb_content_element col-xs-4 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <p style="text-align: left;">2004 &#8211; 2006<br /> Burbank, CA</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wpb_row vc_row-fluid">
+                                                    <div class="vc_col-sm-3 wpb_column column_container">
+                                                        <div class="wpb_wrapper"> </div>
+                                                    </div>
+                                                    <div class="vc_col-sm-9 wpb_column column_container vc_custom_1433322837860">
+                                                        <div class="wpb_wrapper">
+                                                            <div class="wpb_text_column wpb_content_element col-xs-8 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <h4 style="text-align: left;">Advertising Art Direction</h4>
+                                                                    <p style="text-align: left; font-family: lora; font-style: italic;">Columbia College Chicago</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="wpb_text_column wpb_content_element col-xs-4 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <p style="text-align: left;">2001 &#8211; 2003<br /> Chicago, IL</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wpb_row vc_row-fluid">
+                                                    <div class="vc_col-sm-3 wpb_column column_container">
+                                                        <div class="wpb_wrapper">
+                                                            <div id="section-3" class="dt-section-head left vc_custom_1434600538413 size-default" dir="ltr" data-uk-scrollspy="{cls:'uk-animation-slide-left', delay:300}">
+                                                                <div>
+                                                                    <h2 style="color:#ffffff" class="section-main-title">Work Experience</h2></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="vc_col-sm-9 wpb_column column_container vc_custom_1433322837860">
+                                                        <div class="wpb_wrapper">
+                                                            <div class="wpb_text_column wpb_content_element col-xs-8 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <h4 style="text-align: left;">Certificate of Marketing &amp; Advertising</h4>
+                                                                    <p style="text-align: left; font-family: lora; font-style: italic;">Bemis Balkind</p>
+                                                                    <p>Anthony creates design concepts, implements marketing strategies and develops digital campaigns. He also supervises and directs a team of artists and designers (leveraging talent from both print and digital departments) while participating in the strategic shaping of Bemis&#8217; clients business goals. He has experience working with leading movie studios, an array of TV networks, as well as destination-driven lifestyle companies.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="wpb_text_column wpb_content_element col-xs-4 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <p style="text-align: left;">2013 &#8211; 2014<br /> Beverly Hills, CA</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wpb_row vc_row-fluid">
+                                                    <div class="vc_col-sm-3 wpb_column column_container">
+                                                        <div class="wpb_wrapper"> </div>
+                                                    </div>
+                                                    <div class="vc_col-sm-9 wpb_column column_container vc_custom_1433322837860">
+                                                        <div class="wpb_wrapper">
+                                                            <div class="wpb_text_column wpb_content_element col-xs-8 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <h4 style="text-align: left;">Creative Director</h4>
+                                                                    <p style="text-align: left; font-family: lora; font-style: italic;">Starmen Design Group, Inc.</p>
+                                                                    <p>Anthony creates design concepts, implements marketing strategies and develops digital campaigns. He also supervises and directs a team of artists and designers (leveraging talent from both print and digital departments) while participating in the strategic shaping of Bemis&#8217; clients business goals. He has experience working with leading movie studios, an array of TV networks, as well as destination-driven lifestyle companies.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="wpb_text_column wpb_content_element col-xs-4 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <p style="text-align: left;">2007 &#8211; 2010<br /> Hollywood, CA</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="wpb_row vc_row-fluid">
+                                                    <div class="vc_col-sm-3 wpb_column column_container">
+                                                        <div class="wpb_wrapper"> </div>
+                                                    </div>
+                                                    <div class="vc_col-sm-9 wpb_column column_container vc_custom_1433322837860">
+                                                        <div class="wpb_wrapper">
+                                                            <div class="wpb_text_column wpb_content_element col-xs-8 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <h4 style="text-align: left;">Marketing/Art Director</h4>
+                                                                    <p style="text-align: left; font-family: lora; font-style: italic;">Sotheby&#8217;s International Real Estate</p>
+                                                                    <p>Anthony creates design concepts, implements marketing strategies and develops digital campaigns. He also supervises and directs a team of artists and designers (leveraging talent from both print and digital departments) while participating in the strategic shaping of Bemis&#8217; clients business goals. He has experience working with leading movie studios, an array of TV networks, as well as destination-driven lifestyle companies.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="wpb_text_column wpb_content_element col-xs-4 wpb_animate_when_almost_visible wpb_bottom-to-top">
+                                                                <div class="wpb_wrapper">
+                                                                    <p style="text-align: left;">2011 &#8211; 2015<br /> Calabasas, CA</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container dt-container">
+                                <div class="wpb_row vc_row-fluid vc_custom_1433383134036">
+                                    <div class="vc_col-sm-4 wpb_column column_container vc_custom_1434420016209">
+                                        <div class="wpb_wrapper">
+                                            <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right vc_align_center default">
+                                                <div class="wpb_wrapper"> <img width="800" height="594" src="../wp-content/uploads/sites/19/2015/05/our-works-1.jpg" class=" vc_box_border_grey attachment-full" alt="Graphic-Designer-Newry12" /> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="vc_col-sm-4 wpb_column column_container vc_custom_1434420144912">
+                                        <div class="wpb_wrapper">
+                                            <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top vc_align_center default">
+                                                <div class="wpb_wrapper"> <img width="800" height="594" src="../wp-content/uploads/sites/19/2015/05/our-works-2.jpg" class=" vc_box_border_grey attachment-full" alt="bigstock-Interior-Of-Busy-Architect-s-O-61344257" /> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="vc_col-sm-4 wpb_column column_container vc_custom_1434420070139">
+                                        <div class="wpb_wrapper">
+                                            <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left vc_align_center default">
+                                                <div class="wpb_wrapper"> <img width="800" height="594" src="../wp-content/uploads/sites/19/2015/05/our-works-3.jpg" class=" vc_box_border_grey attachment-full" alt="2015-04-22-1429727790-2053314-DeathtoStock_CreativeCommunity3" /> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container dt-container">
+                                <div class="wpb_row vc_row-fluid vc_custom_1433316216058">
+                                    <div class="vc_col-sm-12 wpb_column column_container">
+                                        <div class="wpb_wrapper">
+                                            <div id="section-4" class="dt-section-head left size-xlarge" dir="ltr" data-uk-scrollspy="{cls:'uk-animation-slide-left', delay:300}">
+                                                <div>
+                                                    <h2 style="color:#000000" class="section-main-title">The talent behind the reputation</h2></div>
+                                            </div>
+                                            <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_left-to-right">
+                                                <div class="wpb_wrapper">
+                                                    <p style="text-align: left; font-family: lora; font-size: 24px; font-style: italic;"><span style="color: #afafaf;">Decorates your functions to be timeless, sustainable, efficient and beautiful.</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_right-to-left">
+                                                <div class="wpb_wrapper">
+                                                    <p><strong>Deep Decorators</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                                    <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container dt-container">
+                                <div class="wpb_row vc_row-fluid vc_custom_1433384982515">
+                                    <div class="vc_col-sm-12 wpb_column column_container">
+                                        <div class="wpb_wrapper">
+                                            <div id="section-5" class="dt-section-head center size-default" dir="ltr" data-uk-scrollspy="{cls:'uk-animation-slide-left', delay:300}">
+                                                <div>
+                                                    <h2 style="color:#000000" class="section-main-title">Some of our work has been awarded or featured</h2></div>
+                                            </div>
+                                            <div class="wpb_row vc_row-fluid vc_custom_1433384733462">
+                                                <div class="vc_col-sm-3 wpb_column column_container vc_custom_1434420332754">
+                                                    <div class="wpb_wrapper">
+                                                        <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top vc_align_center default">
+                                                            <div class="wpb_wrapper"> <img width="195" height="125" src="../wp-content/uploads/sites/19/2015/05/logo01x.png" class=" vc_box_border_grey attachment-full" alt="logo01x" /> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="vc_col-sm-3 wpb_column column_container vc_custom_1434420345257">
+                                                    <div class="wpb_wrapper">
+                                                        <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top vc_align_center default">
+                                                            <div class="wpb_wrapper"> <img width="195" height="125" src="../wp-content/uploads/sites/19/2015/05/logo02x.png" class=" vc_box_border_grey attachment-full" alt="logo02x" /> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="vc_col-sm-3 wpb_column column_container vc_custom_1434420370881">
+                                                    <div class="wpb_wrapper">
+                                                        <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top vc_align_center default">
+                                                            <div class="wpb_wrapper"> <img width="195" height="125" src="../wp-content/uploads/sites/19/2015/05/logo03x.png" class=" vc_box_border_grey attachment-full" alt="logo03x" /> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="vc_col-sm-3 wpb_column column_container vc_custom_1434420380853">
+                                                    <div class="wpb_wrapper">
+                                                        <div class="wpb_single_image wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top vc_align_center default">
+                                                            <div class="wpb_wrapper"> <img width="195" height="125" src="../wp-content/uploads/sites/19/2015/05/logo04x.png" class=" vc_box_border_grey attachment-full" alt="logo04x" /> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-container wpb_row vc_row-fluid vc_custom_1434592732678">
+                    <div class="container dt-container">
+                        <div class="row">
+                            <div class="vc_col-sm-12 wpb_column column_container">
+                                <div class="wpb_wrapper">
+                                    <div class="wpb_row vc_row-fluid vc_custom_1434591837029">
+                                        <div class="vc_col-sm-6 wpb_column column_container vc_custom_1434433962853">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_text_column wpb_content_element xs-text-center">
+                                                    <div class="wpb_wrapper">
+                                                        <h3><span style="color: #ffffff;">HEAD OFFICE</span></h3>
+                                                        <p><span style="color: #ffffff;">Deep Decorators</span></p>
+                                                        <p><span style="color: #ffffff;">22 N 12th St New York, NY</span></p>
+                                                        <p><span style="color: #ffffff;">contact@yoursite.com</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="vc_col-sm-6 wpb_column column_container vc_custom_1434597667428">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_text_column wpb_content_element xs-text-center">
+                                                    <div class="wpb_wrapper">
+                                                        <h3 style="text-align: right;"><span style="color: #ffffff;">REPRESENTATIVE OFFICE</span></h3>
+                                                        <p style="text-align: right;"><span style="color: #ffffff;">Deep Decorators</span></p>
+                                                        <p style="text-align: right;"><span style="color: #ffffff;">Bolder Folsom Ave, Suite 600, San Francisco</span></p>
+                                                        <p style="text-align: right;"><span style="color: #ffffff;">contact@yoursite.com</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wpb_row vc_row-fluid vc_custom_1434596988705">
+                                        <div class="vc_col-sm-12 wpb_column column_container">
+                                            <div class="wpb_wrapper">
+                                                <div class="vc_separator wpb_content_element vc_sep_width_100 vc_sep_pos_align_center vc_separator_no_text"> <span class="vc_sep_holder vc_sep_holder_l"><span style="border-color:rgb(255,255,255);border-color:rgba(255,255,255,0.2);" class="vc_sep_line"></span></span> <span class="vc_sep_holder vc_sep_holder_r"><span style="border-color:rgb(255,255,255);border-color:rgba(255,255,255,0.2);" class="vc_sep_line"></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wpb_row vc_row-fluid vc_custom_1434596980787">
+                                        <div class="vc_col-sm-6 wpb_column column_container">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_text_column wpb_content_element xs-text-center">
+                                                    <div class="wpb_wrapper">
+                                                        <p style="text-align: left; font-size: 14px;"><span style="color: #999999;">© 2016 Deep Decorators. By Rachit Sakhidas</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="vc_col-sm-6 wpb_column column_container">
+                                            <div class="wpb_wrapper">
+                                                <div class="wpb_text_column wpb_content_element xs-text-center">
+                                                    <div class="wpb_wrapper">
+                                                        <p style="text-align: right; font-size: 14px;"><span style="color: #999999;">Design-crafted in HTML5/CSS3</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--[if IE 9]> <link property rel='stylesheet' id='scroll-spy-ie-css' href='http://hnd-demo.detheme.com/logocentered/wp-content/plugins/hnd-vc-addon//css/scroll_spy_ie9.css' type='text/css' media='all' /> <![endif]-->
+    
+    <script type='text/javascript' src='../wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var _wpcf7 = {
+            "loaderUrl": "http:\/\/hnd-demo.detheme.com\/logocentered\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif",
+            "sending": "Sending ..."
+        };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='../wp-content/plugins/contact-form-7/includes/js/scripts.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/woocommerce/assets/js/select2/select2.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.js'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var woocommerce_params = {
+            "ajax_url": "\/logocentered\/wp-admin\/admin-ajax.php"
+        };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='../wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/woocommerce/assets/js/jquery-cookie/jquery.cookie.js'></script>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var wc_cart_fragments_params = {
+            "ajax_url": "\/logocentered\/wp-admin\/admin-ajax.php",
+            "fragment_name": "wc_fragments"
+        };
+        /* ]]> */
+    </script>
+    <script type='text/javascript' src='../wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.js'></script>
+    <script type='text/javascript' src='../wp-content/themes/hnd/js/modernizr.js'></script>
+    <script type='text/javascript' src='../wp-content/themes/hnd/js/bootstrap.js'></script>
+    <script type='text/javascript' src='../wp-content/themes/hnd/js/myscript.js'></script>
+    <script type='text/javascript' src='../wp-content/themes/hnd/js/select.js'></script>
+    <script type='text/javascript' src='../wp-content/themes/hnd/js/select.init.js'></script>
+    <script type='text/javascript' src='../wp-content/themes/hnd/js/jquery.appear.js'></script>
+    <script type='text/javascript' src='../wp-content/themes/hnd/js/jquery.counto.js'></script>
+    <script type='text/javascript' src='../wp-content/themes/hnd/js/comment-reply.min.js'></script>
+    <script type='text/javascript' src='../wp-content/themes/hnd/js/paspartu.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/js_composer/assets/js/js_composer_front.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/js_composer/assets/lib/waypoints/waypoints.min.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/hnd-vc-addon/js/uilkit.js'></script>
+    <script type='text/javascript' src='../wp-content/plugins/hnd-vc-addon/js/scrollspy.js'></script>
+    <script type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('head').append('<style type="text/css">.dt-megamenu-custom-width-1549{ width:750px !important; }@media ( max-width:991px ) {.dt-megamenu-custom-width-1549{ width:270px !important; }}#megamenu_bg_1549 {background: url(http://hnd-demo.detheme.com/wp-content/uploads/2015/06/mega-menu-portfolio05.jpg)   no-repeat;}@media ( max-width:990px ) { #megamenu_bg_1549 {background: none;}}.dt-megamenu-custom-width-1560{ width:500px !important; }@media ( max-width:991px ) {.dt-megamenu-custom-width-1560{ width:270px !important; }}#megamenu_bg_1560 {background: url(http://hnd-demo.detheme.com/wp-content/uploads/2015/06/mega-menu-img2.jpg)   ;}@media ( max-width:990px ) { #megamenu_bg_1560 {background: none;}}.vc_custom_1433315937751{margin-top: 100px ;}.vc_custom_1433316216058{margin-top: 40px ;}.vc_custom_1434600403159{margin-top: -15px !important;}.vc_custom_1434600413366{margin-bottom: 40px !important;}.vc_custom_1433383103635{margin-top: 60px ;padding-top: 100px ;padding-bottom: 150px ;background-color: #38a4b4 ;}.vc_custom_1434600449489{margin-top: -10px !important;padding-bottom: 40px !important;}.vc_custom_1433322837860{padding-left: 0px !important;}.vc_custom_1433322837860{padding-left: 0px !important;}.vc_custom_1433322837860{padding-left: 0px !important;}.vc_custom_1434600538413{margin-top: -10px !important;padding-bottom: 40px !important;}.vc_custom_1433322837860{padding-left: 0px !important;}.vc_custom_1433322837860{padding-left: 0px !important;}.vc_custom_1433322837860{padding-left: 0px !important;}.vc_custom_1433383134036{margin-top: -150px ;}.vc_custom_1434420016209{border-top-width: 1px !important;border-right-width: 1px !important;border-bottom-width: 1px !important;border-left-width: 1px !important;padding-right: 0px !important;padding-left: 0px !important;border-left-color: #f3f3f3 !important;border-left-style: solid !important;border-right-color: #f3f3f3 !important;border-right-style: solid !important;border-top-color: #f3f3f3 !important;border-top-style: solid !important;border-bottom-color: #f3f3f3 !important;border-bottom-style: solid !important;}.vc_custom_1434420144912{border-top-width: 1px !important;border-right-width: 1px !important;border-bottom-width: 1px !important;padding-right: 0px !important;padding-left: 0px !important;border-right-color: #f3f3f3 !important;border-right-style: solid !important;border-top-color: #f3f3f3 !important;border-top-style: solid !important;border-bottom-color: #f3f3f3 !important;border-bottom-style: solid !important;}.vc_custom_1434420070139{border-top-width: 1px !important;border-right-width: 1px !important;border-bottom-width: 1px !important;padding-right: 0px !important;padding-left: 0px !important;border-right-color: #f3f3f3 !important;border-right-style: solid !important;border-top-color: #f3f3f3 !important;border-top-style: solid !important;border-bottom-color: #f3f3f3 !important;border-bottom-style: solid !important;}.vc_custom_1433316216058{margin-top: 40px ;}.vc_custom_1433384982515{margin-top: 60px ;margin-bottom: 100px ;}.vc_custom_1433384733462{margin-top: 60px ;}.vc_custom_1434420332754{padding-top: 30px !important;padding-bottom: 30px !important;}.vc_custom_1434420345257{padding-top: 30px !important;padding-bottom: 30px !important;}.vc_custom_1434420370881{padding-top: 30px !important;padding-bottom: 30px !important;}.vc_custom_1434420380853{padding-top: 30px !important;padding-bottom: 30px !important;}.vc_custom_1434592732678{margin-bottom: 0px ;padding-top: 40px ;padding-bottom: 30px ;background-image:url(http://hnd-demo.detheme.com/logocentered/wp-content/uploads/sites/19/2015/05/shutterstock_66167818x.jpg)!important;background-position: center !important; background-repeat: no-repeat !important; background-size: cover!important;background-attachment: fixed !important;}.vc_custom_1434591837029{margin-top: 50px ;margin-bottom: 0px ;}.vc_custom_1434433962853{margin-bottom: 30px !important;}.vc_custom_1434597667428{margin-bottom: 30px !important;}.vc_custom_1434596988705{margin-bottom: 0px ;}.vc_custom_1434596980787{margin-top: 20px ;}</style>');
+        });
+    </script>
+    <div class="jquery-media-detect"></div>
+</body>
+</html>
